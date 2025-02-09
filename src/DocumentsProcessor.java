@@ -34,7 +34,7 @@ public class DocumentsProcessor implements IDocumentsProcessor{
                 }
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println("processDocuments: " + e.getMessage());
             }
         }
         return nMap;

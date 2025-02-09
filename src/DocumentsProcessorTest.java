@@ -11,15 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DocumentsProcessorTest {
     private Map<String, List<String>> docMap;
     private DocumentsProcessor d;
-    private final String ngramFile = "test_out/grams.txt";
+    private final String ngramFile = "/Users/henrycorkran/Desktop/Java/PlagiarismDetector/test_doc/grams.txt";
     List<Tuple<String, Integer>> tList;
     TreeSet<Similarities> simSet;
 
     @BeforeEach
     void setup() {
         d = new DocumentsProcessor();
-
-        docMap = d.processDocuments("test_doc/match_testing", 3);
+        docMap = d.processDocuments("/Users/henrycorkran/Desktop/Java/PlagiarismDetector/test_doc/match_testing", 3);
         tList = d.storeNGrams(docMap, ngramFile);
         simSet = d.computeSimilarities(ngramFile, tList);
     }
@@ -27,10 +26,10 @@ public class DocumentsProcessorTest {
     @Test
     //processDocuments minimum functionality
     void processDocumentsMin(){
-        List<String> abfList = docMap.get("abf0704.txt");
-        List<String> przList = docMap.get("prz100.txt");
-        assertEquals(abfList.getFirst(), "nineteeneightyfour");
-        assertEquals(przList.getFirst(), "shortlyafterthe");
+        List<String> t1 = docMap.get("test1.txt");
+        List<String> t2 = docMap.get("test2.txt");
+        assertEquals(t1.getFirst(), "noonecan");
+        assertEquals(t2.getFirst(), "onecancopy");
     }
 
     @Test
@@ -50,8 +49,8 @@ public class DocumentsProcessorTest {
 
             String result = comp.toString();
 
-            assertEquals(result, docMap.get("prz100.txt").getFirst());
-            assertEquals(result.getBytes().length, 15);
+            assertEquals(result, docMap.get("test1.txt").getFirst());
+            assertEquals(result.getBytes().length, 8);
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
